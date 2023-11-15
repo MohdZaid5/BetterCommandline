@@ -65,6 +65,8 @@ class Colored:
             return ANSI.BACKGROUND.format(*[int(color[i:i+2], 16) for i in (0, 2, 4)])
         else:
             raise NotImplementedError(f'Colored.Background does not support {type(color)} for color')
+        
+    
 class Colors:
     
     '''
