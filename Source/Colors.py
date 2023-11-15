@@ -1,4 +1,5 @@
 
+from functools import singledispatch
 from typing import Any, Tuple
 
 
@@ -13,6 +14,43 @@ class ANSI:
     HIDDEN      :str = '\033[8m'
     RESET       :str = '\033[0;0m'
 
+
+class Color:
+
+    @singledispatch
+    @staticmethod
+    def Foreground(_color: Any) -> str:
+        # Raise an error if the type of _color is not supported
+        raise NotImplementedError(f'Color.Foreground does not support {type(_color)} for _color')
+
+    @Foreground.register
+    def _( _color: tuple ) -> str:
+        # Format the ANSI escape code for foreground color with RGB tuple
+        return ANSI.FOREGROUND.format(*_color)
+
+    @Foreground.register
+    def _( _color: str ) -> str:
+        # Convert hexadecimal color to RGB and format the ANSI escape code for foreground color
+        _color = _color.lstrip('#')
+        return ANSI.FOREGROUND.format(*[int(_color[i:i+2], 16) for i in (0, 2, 4)])
+
+    @singledispatch
+    @staticmethod
+    def Background(_color: Any) -> str:
+        # Raise an error if the type of _color is not supported
+        raise NotImplementedError(f'Color.Background does not support {type(_color)} for _color')
+
+    @Background.register
+    def _( _color: tuple ) -> str:
+        # Format the ANSI escape code for background color with RGB tuple
+        return ANSI.BACKGROUND.format(*_color)
+
+    @Background.register
+    def _( _color: str ) -> str:
+        # Convert hexadecimal color to RGB and format the ANSI escape code for background color
+        _color = _color.lstrip('#')
+        return ANSI.BACKGROUND.format(*[int(_color[i:i+2], 16) for i in (0, 2, 4)])
+    
 
 class Colors:
     
