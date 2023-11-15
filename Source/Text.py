@@ -14,8 +14,8 @@ class Text:
 
     `Example`:
     ```
-    Highlighter = Text( Colors.ORANGE, ANSI.BOLD)
-    print( Highlighter("Hello World!") )
+        Highlighter = Text( Colors.ORANGE, ANSI.BOLD)
+        print( Highlighter("Hello World!") )
     ```
 
     `Methods`:

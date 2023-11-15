@@ -25,7 +25,7 @@ class Alias:
 
     `Example`:
     ```
-    alias = Alias("Example", (255, 0, 0), "#00FF00", banner_width=20, style=ANSI.BOLD, badge_sign="*")
+        alias = Alias("Example", (255, 0, 0), "#00FF00", banner_width=20, style=ANSI.BOLD, badge_sign="*")
     ```
     """
 
