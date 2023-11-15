@@ -15,41 +15,54 @@ class ANSI:
     RESET       :str = '\033[0;0m'
 
 
-class Color:
+class Colored:
+
+    """
+    Utility class for generating ANSI escape codes for text color formatting.
+
+    Usage:
+    - Call the Foreground or Background methods to generate ANSI escape codes for text color formatting.
+
+    Example:
+    ```
+    foreground:str = Colored.Foreground( tuple( r, g, b ) )
+    background:str = Colored.Background("#00FF00")
+    ```
+    """
 
     @singledispatch
     @staticmethod
-    def Foreground(_color: Any) -> str:
-        # Raise an error if the type of _color is not supported
-        raise NotImplementedError(f'Color.Foreground does not support {type(_color)} for _color')
+    def Foreground(color: Any) -> str:
+        # Raise an error if the type of color is not supported
+        raise NotImplementedError(f'Color.Foreground does not support {type(color)} for color')
 
     @Foreground.register
-    def _( _color: tuple ) -> str:
+    def _(color: tuple) -> str:
         # Format the ANSI escape code for foreground color with RGB tuple
-        return ANSI.FOREGROUND.format(*_color)
+        return ANSI.FOREGROUND.format(*color)
 
     @Foreground.register
-    def _( _color: str ) -> str:
+    def _(color: str) -> str:
         # Convert hexadecimal color to RGB and format the ANSI escape code for foreground color
-        _color = _color.lstrip('#')
-        return ANSI.FOREGROUND.format(*[int(_color[i:i+2], 16) for i in (0, 2, 4)])
+        color = color.lstrip('#')
+        return ANSI.FOREGROUND.format(*[int(color[i:i+2], 16) for i in (0, 2, 4)])
 
     @singledispatch
     @staticmethod
-    def Background(_color: Any) -> str:
-        # Raise an error if the type of _color is not supported
-        raise NotImplementedError(f'Color.Background does not support {type(_color)} for _color')
+    def Background(color: Any) -> str:
+        # Raise an error if the type of color is not supported
+        raise NotImplementedError(f'Color.Background does not support {type(color)} for color')
 
     @Background.register
-    def _( _color: tuple ) -> str:
+    def _(color: tuple) -> str:
         # Format the ANSI escape code for background color with RGB tuple
-        return ANSI.BACKGROUND.format(*_color)
+        return ANSI.BACKGROUND.format(*color)
 
     @Background.register
-    def _( _color: str ) -> str:
+    def _(color: str) -> str:
         # Convert hexadecimal color to RGB and format the ANSI escape code for background color
-        _color = _color.lstrip('#')
-        return ANSI.BACKGROUND.format(*[int(_color[i:i+2], 16) for i in (0, 2, 4)])
+        color = color.lstrip('#')
+        return ANSI.BACKGROUND.format(*[int(color[i:i+2], 16) for i in (0, 2, 4)])
     
 
 class Colors:
