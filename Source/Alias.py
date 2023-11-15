@@ -9,12 +9,21 @@ class Alias:
     """
     Class representing an alias with customizable formatting.
 
+    `Parameters`:
+    - `text`        : The main text content of the alias.
+    - `foreground`  : `Foreground` color of the alias, specified as either an RGB `tuple` or a `hexadecimal` color code.
+    - `background`  : `Background` color of the alias, specified as either an RGB `tuple` or a `hexadecimal` color code.
+    - `banner_width`: `Optional` width for the banner. If not provided, the width will be determined by the length of the text.
+    - `style`       : `Optional` text style for the alias, e.g., bold, italics.
+    - `badge_sign`  : `Optional` character to represent a badge within the alias.
+
+
     `Properties`:
     - `Banner`  : Returns the formatted banner with foreground and background colors, text style, and badge.
     - `Bare`    : Returns the formatted alias without foreground and background colors, only including text and style.
     - `Badge`   : Returns the formatted badge with foreground and background colors, text style, and badge.
 
-    Example:
+    `Example`:
     ```
     alias = Alias("Example", (255, 0, 0), "#00FF00", banner_width=20, style=ANSI.BOLD, badge_sign="*")
     ```
