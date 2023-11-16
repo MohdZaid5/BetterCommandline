@@ -1,6 +1,6 @@
 
 from typing import Optional, Union, Tuple, TypeVar
-from Source.Colors import ANSI, Colors, Colored
+from .Colors import ANSI, Colors, Colored
 
 chr = TypeVar('chr', bound=str)
 

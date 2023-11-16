@@ -1,7 +1,7 @@
 
 from typing import Any, Optional, Tuple, Union
 
-from Source.Colors import ANSI, Colored, Colors
+from .Colors import ANSI, Colored, Colors
 
 
 class Text:
